@@ -29,7 +29,7 @@ export default function Details() {
     if(localStorage.getItem("cartOpen")){
       setHide("right-0");
     }
-  }, []);
+  }, [realId]);
 
   function clickCart(e) {
     setHide("right-0");

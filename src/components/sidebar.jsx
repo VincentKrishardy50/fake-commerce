@@ -6,6 +6,7 @@ import {
   IoMdRemove,
 } from "react-icons/io";
 import { FiTrash2 } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 export default function Sidebar({ hide, backClicked, dataCart, payment, setDataCart, setPayment, totalPaymentLogic }) {
 
@@ -84,13 +85,17 @@ export default function Sidebar({ hide, backClicked, dataCart, payment, setDataC
               ? dataCart.map((item, index) => (
                   <div className="w-full min-h-[150px] flex items-center gap-x-4">
                     <div>
-                      <img className="max-w-[80px]" src={item.image} alt="" />
+                      <Link to={`../${item.id}`}>
+                        <img className="max-w-[80px]" src={item.image} alt="" />
+                      </Link>
                     </div>
                     <div className="w-full flex flex-col">
                       <div className="flex justify-between mb-2">
+                        <Link to={`../${item.id}`}>
                         <div className="text-sm uppercase font-medium max-w-[240px] text-primary hover:underline">
                           {item.title}
                         </div>
+                        </Link>
                         <div className="text-xl cursor-pointer">
                           <IoMdClose className="text-gray-500 hover:text-red-500 transition" />
                         </div>

@@ -43,7 +43,16 @@ export default function Login({ setLoggedIn }) {
       username: document.getElementById("username").value,
       password: document.getElementById("password").value,
     };
-
+    
+    // if (
+    //   localStorage.getItem("username")||
+    //   localStorage.getItem("email").includes(dataLogin.email)
+    // ) {
+    //   username_arr = JSON.parse(localStorage.getItem("username"));
+    //   email_arr = JSON.parse(localStorage.getItem("email"));
+    //   toast("Error during signup: username or email already exists");
+    //   document.getElementById("signup").textContent = "Sign Up";
+    // } 
   
       axios
         .post("https://fakestoreapi.com/users", dataLogin)
@@ -52,6 +61,21 @@ export default function Login({ setLoggedIn }) {
           setLoggedIn(true);
           navigate("/");
           localStorage.setItem("setToast", false);
+
+          let username_arr = []
+          let email_arr = []
+          if(localStorage.getItem("username")){
+            console.log("masuk")
+            username_arr = JSON.parse(localStorage.getItem("username"))
+            email_arr = JSON.parse(localStorage.getItem("email"))
+            username_arr.push(dataLogin.username)
+            email_arr.push(dataLogin.email)
+            localStorage.setItem("username", username_arr)
+            localStorage.setItem("email", email_arr)
+          }else{
+            localStorage.setItem("username", [dataLogin.username])
+            localStorage.setItem("email", [dataLogin.email])
+          }
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
